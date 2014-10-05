@@ -71,14 +71,14 @@ class oracle::server (
       cwd => "$ORACLE_ROOT/tmp",
       require => Package['unzip'],
       creates => "$ORACLE_ROOT/tmp/database",
-      user => "$ORACLE_USER";
+      user => root;
 
     "unzip part2":
       command => "/usr/bin/unzip /vagrant/modules/oracle/files/linux.x64_11gR2_database_2of2.zip -d $ORACLE_ROOT/tmp",
       cwd => "$ORACLE_ROOT/tmp",
       require => Exec['unzip part1'],
       creates => "$ORACLE_ROOT/tmp/database/stage/Components/oracle.jdk/1.5.0.17.0/1/DataFiles",
-      user => "$ORACLE_USER";
+      user => root;
 
     "install" :
       command => "/bin/sh -c '$ORACLE_ROOT/tmp/database/runInstaller -silent -waitforcompletion -ignorePrereq -responseFile $ORACLE_ROOT/tmp/db_install_my.rsp'",
